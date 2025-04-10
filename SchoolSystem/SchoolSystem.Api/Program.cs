@@ -1,4 +1,6 @@
 
+using SchoolSystem.Api.Configurations;
+
 namespace SchoolSystem.Api
 {
     public class Program
@@ -12,6 +14,8 @@ namespace SchoolSystem.Api
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+
+            builder.ConfigureDatabase();
 
             var app = builder.Build();
 
