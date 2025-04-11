@@ -6,7 +6,7 @@ public interface IStudentRepository
 {
     Task<Student> SelectStudentByIdAsync(long id);
     Task<List<Student>> SelectAllStudentsAsync(bool includeTeacher, bool includeClass, int skip, int take);
-    Task InsertStudentAsync(Student student);
+    Task<long> InsertStudentAsync(Student student);
     Task UpdateStudentAsync(Student student);
     Task DeleteStudentAsync(long id);
 }

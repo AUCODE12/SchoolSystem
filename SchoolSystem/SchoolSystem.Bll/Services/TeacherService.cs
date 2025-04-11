@@ -12,12 +12,12 @@ public class TeacherService : ITeacherService
         this.teacherRepository = teacherRepository;
     }
 
-    public Task DeleteTeacherAsync(int id)
+    public Task DeleteTeacherAsync(long id)
     {
         throw new NotImplementedException();
     }
 
-    public Task InsertTeacherAsync(TeacherDto teacher)
+    public Task<long> InsertTeacherAsync(TeacherDto teacher)
     {
         throw new NotImplementedException();
     }
@@ -27,7 +27,7 @@ public class TeacherService : ITeacherService
         throw new NotImplementedException();
     }
 
-    public Task<TeacherDto> SelectTeacherByIdAsync(int id)
+    public Task<TeacherDto> SelectTeacherByIdAsync(long id)
     {
         throw new NotImplementedException();
     }

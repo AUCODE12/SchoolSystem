@@ -4,9 +4,9 @@ namespace SchoolSystem.Bll.Services;
 
 public interface IClassRoomService
 {
-    Task<ClassRoomDto> GetClassRoomByIdAsync(int id);
+    Task<ClassRoomDto> GetClassRoomByIdAsync(long id);
     Task<List<ClassRoomDto>> GetAllClassRoomsAsync(bool includeStudent, bool includeTeacher, int skip, int take);
-    Task AddClassRoomAsync(ClassRoomDto classRoom);
+    Task<long> AddClassRoomAsync(ClassRoomDto classRoom);
     Task UpdateClassRoomAsync(ClassRoomDto classRoom);
-    Task DeleteClassRoomAsync(int id);
+    Task DeleteClassRoomAsync(long id);
 }

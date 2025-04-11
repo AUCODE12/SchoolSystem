@@ -20,10 +20,11 @@ public class TeacherRepository : ITeacherRepository
         await mainContext.SaveChangesAsync();
     }
 
-    public async Task InsertTeacherAsync(Teacher teacher)
+    public async Task<long> InsertTeacherAsync(Teacher teacher)
     {
         await mainContext.Teachers.AddAsync(teacher);
         await mainContext.SaveChangesAsync();
+        return teacher.TeacherId;
     }
 
     public Task<List<Teacher>> SelectAllTeachersAsync(bool includeStudent, bool includeClass, int skip, int take)

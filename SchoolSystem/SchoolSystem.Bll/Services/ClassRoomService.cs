@@ -12,12 +12,12 @@ public class ClassRoomService : IClassRoomService
         this.classRoomRepository = classRoomRepository;
     }
 
-    public Task AddClassRoomAsync(ClassRoomDto classRoom)
+    public Task<long> AddClassRoomAsync(ClassRoomDto classRoom)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteClassRoomAsync(int id)
+    public Task DeleteClassRoomAsync(long id)
     {
         throw new NotImplementedException();
     }
@@ -27,7 +27,7 @@ public class ClassRoomService : IClassRoomService
         throw new NotImplementedException();
     }
 
-    public Task<ClassRoomDto> GetClassRoomByIdAsync(int id)
+    public Task<ClassRoomDto> GetClassRoomByIdAsync(long id)
     {
         throw new NotImplementedException();
     }
