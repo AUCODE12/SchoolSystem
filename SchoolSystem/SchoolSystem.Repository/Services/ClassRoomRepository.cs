@@ -1,31 +1,61 @@
-﻿using SchoolSystem.Dal.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolSystem.Dal;
+using SchoolSystem.Dal.Entities;
 
 namespace SchoolSystem.Repository.Services;
 
 public class ClassRoomRepository : IClassRoomRepository
 {
-    public Task DeleteClassRoomAsync(int id)
+    private readonly MainContext _mainContext;
+
+    public ClassRoomRepository(MainContext mainContext)
     {
-        throw new NotImplementedException();
+        _mainContext = mainContext;
     }
 
-    public Task InsertClassRoomAsync(ClassRoom classRoom)
+    public async Task DeleteClassRoomAsync(long id)
     {
-        throw new NotImplementedException();
+        var classRoom = await SelectClassRoomByIdAsync(id);
+        _mainContext.ClassRooms.Remove(classRoom);
+        await _mainContext.SaveChangesAsync();
     }
 
-    public Task<List<ClassRoom>> SelectAllClassRoomsAsync(bool includeStudent, bool includeTeacher, int skip, int take)
+
+    public async Task<long> InsertClassRoomAsync(ClassRoom classRoom)
     {
-        throw new NotImplementedException();
+        await _mainContext.ClassRooms.AddAsync(classRoom);
+        await _mainContext.SaveChangesAsync();
+        return classRoom.ClassRoomId;
     }
 
-    public Task<ClassRoom> SelectClassRoomByIdAsync(int id)
+    public async Task<List<ClassRoom>> SelectAllClassRoomsAsync(bool includeStudent, bool includeTeacher, int skip, int take)
     {
-        throw new NotImplementedException();
+        IQueryable<ClassRoom> query = _mainContext.ClassRooms;
+        if (includeStudent )
+        {
+            query = query.Include(b => b.ClassRoomStudents);
+        }
+        if (includeTeacher)
+        {
+            query = query.Include(b => b.ClassRoomTeachers);
+        }
+
+            return await quit
     }
 
-    public Task UpdateClassRoomAsync(ClassRoom classRoom)
+    public async Task<ClassRoom> SelectClassRoomByIdAsync(long id)
     {
-        throw new NotImplementedException();
+        var classroomId = await _mainContext.ClassRooms.FirstOrDefaultAsync(b => b.ClassRoomId == id);
+        if (classroomId is null)
+        {
+            throw new Exception("wrong Id");
+        }
+        return classroomId;
+    }
+
+    public async Task UpdateClassRoomAsync(ClassRoom classRoom)
+    {
+        var classroomDb = await SelectClassRoomByIdAsync(classRoom.ClassRoomId);
+        var index = _mainContext.IndexOf(classroomDb);
     }
 }

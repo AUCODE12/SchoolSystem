@@ -4,14 +4,14 @@ namespace SchoolSystem.Repository.Services;
 
 public interface IClassRoomRepository
 {
-    Task<ClassRoom> SelectClassRoomByIdAsync(int id);
-    Task<List<ClassRoom>> SelectAllClassRoomsAsync(bool includeStudent = false, bool includeTeacher = false, int skip, int take);
-    Task InsertClassRoomAsync(ClassRoom classRoom);
+    Task<ClassRoom> SelectClassRoomByIdAsync(long id);
+    Task<List<ClassRoom>> SelectAllClassRoomsAsync(bool includeStudent = false, bool includeTeacher = false, int skip = 0, int take = 10);
+    Task<long> InsertClassRoomAsync(ClassRoom classRoom);
     Task UpdateClassRoomAsync(ClassRoom classRoom);
-    Task DeleteClassRoomAsync(int id);
+    Task DeleteClassRoomAsync(long id);
 }
 
-/*** 
+/*
 Task<ClassRoom> SelectClassRoomByIdAsync(int id);
 
 Vazifa: Bu funksiya berilgan id bo'yicha sinf (ClassRoom) ma'lumotlarini asinxron ravishda qaytaradi. Maqsad, ma'lum bir sinfni topish.
@@ -31,3 +31,5 @@ Vazifa: Bu funksiya mavjud bo'lgan sinf ma'lumotlarini yangilaydi. classRoom oby
 Task DeleteClassRoomAsync(int id);
 
 Vazifa: Bu funksiya berilgan id bo'yicha sinfni o'chiradi. Sinfni o'chirish uchun id parametridan foydalaniladi.
+
+*/
