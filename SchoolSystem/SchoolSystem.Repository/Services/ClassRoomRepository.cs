@@ -28,7 +28,7 @@ public class ClassRoomRepository : IClassRoomRepository
         return classRoom.ClassRoomId;
     }
 
-    public async Task<List<ClassRoom>> SelectAllClassRoomsAsync(bool includeStudent, bool includeTeacher, int skip, int take)
+    public async Task<List<ClassRoom>> SelectAllClassRoomsAsync(bool includeStudent = false, bool includeTeacher = false, int skip = 1, int take = 10)
     {
         IQueryable<ClassRoom> query = _mainContext.ClassRooms;
         if (includeStudent )
@@ -40,7 +40,10 @@ public class ClassRoomRepository : IClassRoomRepository
             query = query.Include(b => b.ClassRoomTeachers);
         }
 
-            return await quit
+        return await query
+        .Skip(skip)
+        .Take(take)
+        .ToListAsync();
     }
 
     public async Task<ClassRoom> SelectClassRoomByIdAsync(long id)
@@ -55,7 +58,8 @@ public class ClassRoomRepository : IClassRoomRepository
 
     public async Task UpdateClassRoomAsync(ClassRoom classRoom)
     {
-        var classroomDb = await SelectClassRoomByIdAsync(classRoom.ClassRoomId);
-        var index = _mainContext.IndexOf(classroomDb);
+        _mainContext.ClassRooms.Update(classRoom);
+        await _mainContext.SaveChangesAsync();
+
     }
 }
