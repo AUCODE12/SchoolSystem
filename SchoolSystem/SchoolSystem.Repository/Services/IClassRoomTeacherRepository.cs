@@ -2,10 +2,10 @@
 
 public interface IClassRoomTeacherRepository
 {
-    Task InsertClassRoomTeacherAsync(int classRoomId, int teacherId);
-    Task DeleteClassRoomTeacherAsync(int classRoomId, int teacherId);
-    Task<List<int>> SelectTeachersByClassRoomIdAsync(int classRoomId);
-    Task<List<int>> SelectClassRoomsByTeacherIdAsync(int teacherId);
+    Task InsertClassRoomTeacherAsync(long classRoomId, long teacherId);
+    Task DeleteClassRoomTeacherAsync(long classRoomId, long teacherId);
+    Task<List<long>> SelectTeachersByClassRoomIdAsync(long classRoomId);
+    Task<List<long>> SelectClassRoomsByTeacherIdAsync(long teacherId);
 }
 
 /***

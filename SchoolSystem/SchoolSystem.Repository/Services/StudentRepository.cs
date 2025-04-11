@@ -1,17 +1,29 @@
-﻿using SchoolSystem.Dal.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolSystem.Dal;
+using SchoolSystem.Dal.Entities;
 
 namespace SchoolSystem.Repository.Services;
 
 public class StudentRepository : IStudentRepository
 {
-    public Task DeleteStudentAsync(int id)
+    private readonly MainContext mainContext;
+
+    public StudentRepository(MainContext mainContext)
     {
-        throw new NotImplementedException();
+        this.mainContext = mainContext;
     }
 
-    public Task InsertStudentAsync(Student student)
+    public async Task DeleteStudentAsync(long id)
     {
-        throw new NotImplementedException();
+        var student = await SelectStudentByIdAsync(id);
+        mainContext.Students.Remove(student);
+        await mainContext.SaveChangesAsync();
+    }
+
+    public async Task  InsertStudentAsync(Student student)
+    {
+        await mainContext.Students.AddAsync(student);
+        await mainContext.SaveChangesAsync();
     }
 
     public Task<List<Student>> SelectAllStudentsAsync(bool includeTeacher, bool includeClass, int skip, int take)
@@ -19,13 +31,16 @@ public class StudentRepository : IStudentRepository
         throw new NotImplementedException();
     }
 
-    public Task<Student> SelectStudentByIdAsync(int id)
+    public async Task<Student> SelectStudentByIdAsync(long id)
     {
-        throw new NotImplementedException();
+        var students = await mainContext.Students.ToListAsync();
+        return students.FirstOrDefault(s => s.StudentId == id);
     }
 
-    public Task UpdateStudentAsync(Student student)
+    public async Task UpdateStudentAsync(Student student)
     {
-        throw new NotImplementedException();
+        mainContext.Students.Update(student);
+        await mainContext.SaveChangesAsync();
     }
+
 }

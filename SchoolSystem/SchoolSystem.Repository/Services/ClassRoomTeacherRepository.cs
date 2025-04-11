@@ -1,24 +1,33 @@
 ﻿
+using SchoolSystem.Dal;
+
 namespace SchoolSystem.Repository.Services;
 
 public class ClassRoomTeacherRepository : IClassRoomTeacherRepository
 {
-    public Task DeleteClassRoomTeacherAsync(int classRoomId, int teacherId)
+    private readonly MainContext mainContext;
+
+    public ClassRoomTeacherRepository(MainContext mainContext)
+    {
+        this.mainContext = mainContext;
+    }
+
+    public Task DeleteClassRoomTeacherAsync(long classRoomId, long teacherId)
     {
         throw new NotImplementedException();
     }
 
-    public Task InsertClassRoomTeacherAsync(int classRoomId, int teacherId)
+    public Task InsertClassRoomTeacherAsync(long classRoomId, long teacherId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<int>> SelectClassRoomsByTeacherIdAsync(int teacherId)
+    public Task<List<long>> SelectClassRoomsByTeacherIdAsync(long teacherId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<int>> SelectTeachersByClassRoomIdAsync(int classRoomId)
+    public Task<List<long>> SelectTeachersByClassRoomIdAsync(long classRoomId)
     {
         throw new NotImplementedException();
     }

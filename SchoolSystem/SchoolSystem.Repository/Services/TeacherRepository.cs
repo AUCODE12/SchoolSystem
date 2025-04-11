@@ -1,17 +1,29 @@
-﻿using SchoolSystem.Dal.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolSystem.Dal;
+using SchoolSystem.Dal.Entities;
 
 namespace SchoolSystem.Repository.Services;
 
 public class TeacherRepository : ITeacherRepository
 {
-    public Task DeleteTeacherAsync(int id)
+    private readonly MainContext mainContext;
+
+    public TeacherRepository(MainContext mainContext)
     {
-        throw new NotImplementedException();
+        this.mainContext = mainContext;
     }
 
-    public Task InsertTeacherAsync(Teacher teacher)
+    public async Task DeleteTeacherAsync(long id)
     {
-        throw new NotImplementedException();
+        var teacher = await SelectTeacherByIdAsync(id);
+        mainContext.Teachers.Remove(teacher);
+        await mainContext.SaveChangesAsync();
+    }
+
+    public async Task InsertTeacherAsync(Teacher teacher)
+    {
+        await mainContext.Teachers.AddAsync(teacher);
+        await mainContext.SaveChangesAsync();
     }
 
     public Task<List<Teacher>> SelectAllTeachersAsync(bool includeStudent, bool includeClass, int skip, int take)
@@ -19,13 +31,15 @@ public class TeacherRepository : ITeacherRepository
         throw new NotImplementedException();
     }
 
-    public Task<Teacher> SelectTeacherByIdAsync(int id)
+    public async Task<Teacher> SelectTeacherByIdAsync(long id)
     {
-        throw new NotImplementedException();
+        var teachers = await mainContext.Teachers.ToListAsync();
+        return teachers.FirstOrDefault(t => t.TeacherId == id);
     }
 
-    public Task UpdateTeacherAsync(Teacher teacher)
+    public async Task UpdateTeacherAsync(Teacher teacher)
     {
-        throw new NotImplementedException();
+         mainContext.Teachers.Update(teacher);
+        await mainContext.SaveChangesAsync();
     }
 }
