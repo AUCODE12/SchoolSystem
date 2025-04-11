@@ -1,4 +1,5 @@
 ﻿
+using SchoolSystem.Bll.DTOs;
 using SchoolSystem.Repository.Services;
 
 namespace SchoolSystem.Bll.Services;
@@ -12,22 +13,27 @@ public class ClassRoomTeacherService : IClassRoomTeacherService
         this.classRoomTeacherRepository = classRoomTeacherRepository;
     }
 
-    public Task AddClassRoomTeacherAsync(int classRoomId, int teacherId)
+    public Task<long> AddClassRoomTeacherAsync(ClassRoomTeacherDto classRoomTeacherDto)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteClassRoomTeacherAsync(int classRoomId, int teacherId)
+    public Task DeleteClassRoomTeacherAsync(long classRoomId, long teacherId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<int>> GetClassRoomsByTeacherIdAsync(int teacherId)
+    public Task<List<ClassRoomDto>> GetClassRoomsByTeacherIdAsync(long teacherId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<int>> GetTeachersByClassRoomIdAsync(int classRoomId)
+    public Task<ClassRoomTeacherDto> GetClassRoomTeacherAsync(long classRoomId, long teacherId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<TeacherDto>> GetTeachersByClassRoomIdAsync(long classRoomId)
     {
         throw new NotImplementedException();
     }

@@ -1,5 +1,6 @@
 ﻿
 using SchoolSystem.Dal;
+using SchoolSystem.Dal.Entities;
 
 namespace SchoolSystem.Repository.Services;
 
@@ -17,17 +18,34 @@ public class ClassRoomTeacherRepository : IClassRoomTeacherRepository
         throw new NotImplementedException();
     }
 
-    public Task InsertClassRoomTeacherAsync(long classRoomId, long teacherId)
+    public Task<ClassRoomTeacher> GetClassRoomTeacherAsync(long classRoomId, long teacherId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<long>> SelectClassRoomsByTeacherIdAsync(long teacherId)
+    public Task<long> InsertClassRoomTeacherAsync(ClassRoomTeacher classRoomTeacher)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<long>> SelectTeachersByClassRoomIdAsync(long classRoomId)
+    public async Task<List<ClassRoom>> SelectClassRoomsByTeacherIdAsync(long teacherId)
+    {
+        var classRoomTeachers = mainContext.ClassRoomTeachers.Where(c => c.TeacherId == teacherId).ToList();
+        return classRoomTeachers.Select(cR => cR.ClassRoom).ToList();
+    }
+
+    public async Task<List<Teacher>> SelectTeachersByClassRoomIdAsync(long classRoomId)
+    {
+        var classRoomTeachers = mainContext.ClassRoomTeachers.Where(c => c.ClassRoomId == classRoomId).ToList();
+        return classRoomTeachers.Select(t => t.Teacher).ToList();
+    }
+
+    Task<List<Teacher>> IClassRoomTeacherRepository.SelectClassRoomsByTeacherIdAsync(long teacherId)
+    {
+        throw new NotImplementedException();
+    }
+
+    Task<List<ClassRoom>> IClassRoomTeacherRepository.SelectTeachersByClassRoomIdAsync(long classRoomId)
     {
         throw new NotImplementedException();
     }

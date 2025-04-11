@@ -1,9 +1,13 @@
-﻿namespace SchoolSystem.Bll.Services;
+﻿using SchoolSystem.Bll.DTOs;
+using System.Runtime.CompilerServices;
+
+namespace SchoolSystem.Bll.Services;
 
 public interface IClassRoomStudentService
 {
-    Task AddClassRoomStudentAsync(int classRoomId, int studentId);
-    Task DeleteClassRoomStudentAsync(int classRoomId, int studentId);
-    Task<List<int>> GetStudentsByClassRoomIdAsync(int classRoomId);
-    Task<List<int>> GetClassRoomsByStudentIdAsync(int studentId);
+    Task<long> AddClassRoomStudentAsync(ClassRoomStudentDto classRoomStudentDto);
+    Task DeleteClassRoomStudentAsync(long classRoomId, long studentId);
+    Task<ClassRoomStudentDto> GetClassRoomStudentAsync(long classRoomId, long studentId);
+    Task<List<StudentDto>> GetStudentsByClassRoomIdAsync(long classRoomId);
+    Task<List<ClassRoomDto>> GetClassRoomsByStudentIdAsync(long studentId);
 }

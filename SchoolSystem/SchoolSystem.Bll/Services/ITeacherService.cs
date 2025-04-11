@@ -4,9 +4,9 @@ namespace SchoolSystem.Bll.Services;
 
 public interface ITeacherService
 {
-    Task<TeacherDto> SelectTeacherByIdAsync(int id);
+    Task<TeacherDto> SelectTeacherByIdAsync(long id);
     Task<List<TeacherDto>> SelectAllTeachersAsync(bool includeClassRoom, bool includeStudent, int skip, int take);
-    Task InsertTeacherAsync(TeacherDto teacher);
+    Task<long> InsertTeacherAsync(TeacherDto teacher);
     Task UpdateTeacherAsync(TeacherDto teacher);
-    Task DeleteTeacherAsync(int id);
+    Task DeleteTeacherAsync(long id);
 }

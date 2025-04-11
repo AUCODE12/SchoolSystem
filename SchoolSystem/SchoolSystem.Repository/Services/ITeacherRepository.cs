@@ -6,7 +6,7 @@ public interface ITeacherRepository
 {
     Task<Teacher> SelectTeacherByIdAsync(long id);
     Task<List<Teacher>> SelectAllTeachersAsync(bool includeStudent, bool includeClass, int skip, int take);
-    Task InsertTeacherAsync(Teacher teacher);
+    Task<long> InsertTeacherAsync(Teacher teacher);
     Task UpdateTeacherAsync(Teacher teacher);
     Task DeleteTeacherAsync(long id);
 }

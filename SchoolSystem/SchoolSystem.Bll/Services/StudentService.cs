@@ -12,12 +12,12 @@ public class StudentService : IStudentService
         this.studentRepository = studentRepository;
     }
 
-    public Task AddStudentAsync(StudentDto student)
+    public Task<long> AddStudentAsync(StudentDto student)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteStudentAsync(int id)
+    public Task DeleteStudentAsync(long id)
     {
         throw new NotImplementedException();
     }
@@ -27,7 +27,7 @@ public class StudentService : IStudentService
         throw new NotImplementedException();
     }
 
-    public Task<StudentDto> GetStudentByIdAsync(int id)
+    public Task<StudentDto> GetStudentByIdAsync(long id)
     {
         throw new NotImplementedException();
     }
