@@ -16,6 +16,7 @@ namespace SchoolSystem.Api
             builder.Services.AddOpenApi();
 
             builder.ConfigureDatabase();
+            builder.Services.RegisterServices();
 
             var app = builder.Build();
 

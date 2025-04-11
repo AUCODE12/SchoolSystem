@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Cors.Infrastructure;
+using SchoolSystem.Bll.Services;
+using SchoolSystem.Repository.Services;
 
 namespace SchoolSystem.Api.Configurations;
 
@@ -6,23 +8,18 @@ public static class DependensInjectionConfiguration
 {
     public static void RegisterServices(this IServiceCollection services)
     {
-        //services.AddScoped<ICardRepository, CardRepository>();
+        services.AddScoped<IStudentRepository, StudentRepository>();
+        services.AddScoped<ITeacherRepository, TeacherRepository>();
+        services.AddScoped<IClassRoomRepository, ClassRoomRepository>();
+        services.AddScoped<IClassRoomStudentRepository, ClassRoomStudentRepository>();
+        services.AddScoped<IClassRoomTeacherRepository, ClassRoomTeacherRepository>();
+        services.AddScoped<ITeacherStudentRepository, TeacherStudentRepository>();
 
-        //services.AddScoped<ICartRepository, CartRepository>();
-        //services.AddScoped<ICartService, CartService>();
-
-        //services.AddScoped<ICartProductRepository, CartProductRepository>();
-
-        //services.AddScoped<IProductRepository, ProductRepository>();
-
-        //services.AddScoped<IOrderRepository, OrderRepository>();
-        //services.AddScoped<IOrderService, OrderService>();
-        //services.AddScoped<IOrderProductRepository, OrderProductRepository>();
-
-        //services.AddScoped<ICustomerRepository, CustomerRepository>();
-        //services.AddScoped<ICustomerService, CustomerService>();
-
-        //services.AddScoped<IPaymentRepository, PaymentRepository>();
-        //services.AddScoped<IPaymentService, PaymentService>();
+        services.AddScoped<IStudentService, StudentService>();
+        services.AddScoped<ITeacherService, TeacherService>();
+        services.AddScoped<IClassRoomService, ClassRoomService>();
+        services.AddScoped<IClassRoomStudentService, ClassRoomStudentService>();
+        services.AddScoped<IClassRoomTeacherService, ClassRoomTeacherService>();
+        services.AddScoped<ITeacherStudentService, TeacherStudentService>();
     }
 }

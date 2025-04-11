@@ -1,8 +1,17 @@
 ﻿
+using SchoolSystem.Repository.Services;
+
 namespace SchoolSystem.Bll.Services;
 
 public class ClassRoomStudentService : IClassRoomStudentService
 {
+    private readonly IClassRoomStudentRepository classRoomStudentRepository;
+    
+    public ClassRoomStudentService(IClassRoomStudentRepository classRoomStudentRepository)
+    {
+        this.classRoomStudentRepository = classRoomStudentRepository;
+    }
+
     public Task AddClassRoomStudentAsync(int classRoomId, int studentId)
     {
         throw new NotImplementedException();
