@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using SchoolSystem.Dal;
 using SchoolSystem.Dal.Entities;
 
@@ -13,28 +14,51 @@ public class ClassRoomStudentRepository : IClassRoomStudentRepository
         this.mainContext = mainContext;
     }
 
-    public Task DeleteClassRoomStudentAsync(long classRoomId, long studentId)
+    public async Task DeleteClassRoomStudentAsync(long classRoomId, long studentId)
     {
-        throw new NotImplementedException();
+        var entity = await mainContext.ClassRoomStudents.FirstOrDefaultAsync(b => b.ClassRoomId == classRoomId && b.StudentId == studentId);
+        if (entity is null)
+        {
+            throw new Exception("relation not found");
+        }
+
+        mainContext.ClassRoomStudents.Remove(entity);
+        await mainContext.SaveChangesAsync();
     }
 
-    public Task<ClassRoomStudent> GetClassRoomStudentAsync(long classRoomId, long studentId)
+    public async Task<ClassRoomStudent> GetClassRoomStudentAsync(long classRoomId, long studentId)
     {
-        throw new NotImplementedException();
+        var entity = await mainContext.ClassRoomStudents.FirstOrDefaultAsync(b => b.ClassRoomId == classRoomId && b.StudentId == studentId);
+        if (entity is null)
+        {
+            throw new Exception("relation not found");
+        }
+
+        return entity;
     }
 
-    public Task<long> InsertClassRoomStudentAsync(ClassRoomStudent classRoomStudent)
+    public async Task<long> InsertClassRoomStudentAsync(ClassRoomStudent classRoomStudent)
     {
-        throw new NotImplementedException();
+        await mainContext.ClassRoomStudents.AddAsync(classRoomStudent);
+        await mainContext.SaveChangesAsync();
+        return classRoomStudent.ClassRoomId;
     }
 
-    public Task<List<ClassRoom>> SelectClassRoomsByStudentIdAsync(long studentId)
+    public async Task<List<ClassRoom>> SelectClassRoomsByStudentIdAsync(long studentId)
     {
-        throw new NotImplementedException();
+        return await mainContext.ClassRoomStudents
+            .Where(b => b.StudentId == studentId)
+            .Include(b => b.ClassRoom)
+            .Select(b => b.ClassRoom)
+            .ToListAsync();
     }
 
-    public Task<List<Student>> SelectStudentsByClassRoomIdAsync(long classRoomId)
+    public async Task<List<Student>> SelectStudentsByClassRoomIdAsync(long classRoomId)
     {
-        throw new NotImplementedException();
+        return await mainContext.ClassRoomStudents
+            .Where(b => b.ClassRoomId == classRoomId)
+            .Include(b => b.Student)
+            .Select(b => b.Student)
+            .ToListAsync();
     }
 }
