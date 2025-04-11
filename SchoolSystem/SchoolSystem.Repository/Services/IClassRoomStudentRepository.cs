@@ -1,11 +1,14 @@
-﻿namespace SchoolSystem.Repository.Services;
+﻿using SchoolSystem.Dal.Entities;
+
+namespace SchoolSystem.Repository.Services;
 
 public interface IClassRoomStudentRepository
 {
-    Task InsertClassRoomStudentAsync(int classRoomId, int studentId);
-    Task DeleteClassRoomStudentAsync(int classRoomId, int studentId);
-    Task<List<int>> SelectStudentsByClassRoomIdAsync(int classRoomId);
-    Task<List<int>> SelectClassRoomsByStudentIdAsync(int studentId);
+    Task<long> InsertClassRoomStudentAsync(ClassRoomStudent classRoomStudent);
+    Task DeleteClassRoomStudentAsync(long classRoomId, long studentId);
+    Task<ClassRoomStudent> GetClassRoomStudentAsync(long classRoomId, long studentId);
+    Task<List<Student>> SelectStudentsByClassRoomIdAsync(long classRoomId);
+    Task<List<ClassRoom>> SelectClassRoomsByStudentIdAsync(long studentId);
 }
 
 /***

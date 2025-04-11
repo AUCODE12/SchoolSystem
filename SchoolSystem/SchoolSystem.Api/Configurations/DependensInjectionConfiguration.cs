@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Cors.Infrastructure;
-using SchoolSystem.Bll.Services;
+﻿using SchoolSystem.Bll.Services;
+using SchoolSystem.Dal;
 using SchoolSystem.Repository.Services;
 
 namespace SchoolSystem.Api.Configurations;
@@ -21,5 +21,7 @@ public static class DependensInjectionConfiguration
         services.AddScoped<IClassRoomStudentService, ClassRoomStudentService>();
         services.AddScoped<IClassRoomTeacherService, ClassRoomTeacherService>();
         services.AddScoped<ITeacherStudentService, TeacherStudentService>();
+
+        services.AddSingleton<MainContext>();
     }
 }
