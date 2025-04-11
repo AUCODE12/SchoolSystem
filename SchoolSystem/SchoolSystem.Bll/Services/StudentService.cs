@@ -1,9 +1,17 @@
 ﻿using SchoolSystem.Bll.DTOs;
+using SchoolSystem.Repository.Services;
 
 namespace SchoolSystem.Bll.Services;
 
 public class StudentService : IStudentService
 {
+    private readonly IStudentRepository studentRepository;
+
+    public StudentService(IStudentRepository studentRepository)
+    {
+        this.studentRepository = studentRepository;
+    }
+
     public Task AddStudentAsync(StudentDto student)
     {
         throw new NotImplementedException();

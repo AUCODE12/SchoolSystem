@@ -1,9 +1,17 @@
 ﻿using SchoolSystem.Bll.DTOs;
+using SchoolSystem.Repository.Services;
 
 namespace SchoolSystem.Bll.Services;
 
 public class TeacherService : ITeacherService
 {
+    private readonly ITeacherRepository teacherRepository;
+
+    public TeacherService(ITeacherRepository teacherRepository)
+    {
+        this.teacherRepository = teacherRepository;
+    }
+
     public Task DeleteTeacherAsync(int id)
     {
         throw new NotImplementedException();

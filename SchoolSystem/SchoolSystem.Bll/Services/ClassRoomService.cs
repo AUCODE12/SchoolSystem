@@ -1,9 +1,17 @@
 ﻿using SchoolSystem.Bll.DTOs;
+using SchoolSystem.Repository.Services;
 
 namespace SchoolSystem.Bll.Services;
 
 public class ClassRoomService : IClassRoomService
 {
+    private readonly IClassRoomRepository classRoomRepository;
+
+    public ClassRoomService(IClassRoomRepository classRoomRepository)
+    {
+        this.classRoomRepository = classRoomRepository;
+    }
+
     public Task AddClassRoomAsync(ClassRoomDto classRoom)
     {
         throw new NotImplementedException();
